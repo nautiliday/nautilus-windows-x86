@@ -104,7 +104,7 @@ public class WMIProcessorPanelWorker extends SwingWorker<Map<String, Win32Proces
             cpuFields.get(15).setText(currentCpu.extClock() + " MHz");
 
             // assign text to the concise cpu text area
-            JTextArea conciseCpuTextArea = cpuTextAreas.getFirst();
+            JTextArea conciseCpuTextArea = cpuTextAreas.get(0);
             String conciseText = "This CPU, " + String.valueOf(currentCpu.name()).trim() + " consists of "
                     + System.lineSeparator() +
                     currentCpu.numberOfCores() + " cores and " + currentCpu.threadCount() + " threads, out of which "

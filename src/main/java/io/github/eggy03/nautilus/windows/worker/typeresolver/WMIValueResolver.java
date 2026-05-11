@@ -53,6 +53,9 @@ public class WMIValueResolver {
     //Win32_Processor
     @NonNull
     public static String resolveProcessorArchitecture(@Nullable Integer architecture) {
+
+        if (architecture == null) return NOT_AVAILABLE;
+        
         return switch (architecture) {
             case 0 -> "x86";
             case 1 -> "MIPS";
@@ -62,7 +65,6 @@ public class WMIValueResolver {
             case 6 -> "ia64";
             case 9 -> "x64";
             case 12 -> "ARM64";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + architecture;
         };
     }
@@ -71,19 +73,22 @@ public class WMIValueResolver {
     @NonNull
     public static String resolveWMICacheMemoryType(@Nullable Integer cacheType) {
 
+        if (cacheType == null) return NOT_AVAILABLE;
+
         return switch (cacheType) {
             case 1 -> "Other";
             case 2 -> "Unknown";
             case 3 -> "Instruction";
             case 4 -> "Data";
             case 5 -> "Unified";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + cacheType;
         };
     }
 
     @NonNull
     public static String resolveWMICacheMemoryLevel(@Nullable Integer cacheLevel) {
+
+        if (cacheLevel == null) return NOT_AVAILABLE;
 
         return switch (cacheLevel) {
             case 1 -> "Other";
@@ -92,13 +97,14 @@ public class WMIValueResolver {
             case 4 -> "Secondary (L2)";
             case 5 -> "Tertiary (L3)";
             case 6 -> "Not Applicable";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + cacheLevel;
         };
     }
 
     @NonNull
     public static String resolveWMICacheMemoryAssociativity(@Nullable Integer associativity) {
+
+        if (associativity == null) return NOT_AVAILABLE;
 
         return switch (associativity) {
             case 1 -> "Other";
@@ -109,7 +115,6 @@ public class WMIValueResolver {
             case 6 -> "Fully Associative";
             case 7 -> "8-way Set-Associative";
             case 8 -> "16-way Set-Associative";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + associativity;
         };
     }
@@ -117,18 +122,21 @@ public class WMIValueResolver {
     @NonNull
     public static String resolveWMICacheMemoryLocation(@Nullable Integer location) {
 
+        if (location == null) return NOT_AVAILABLE;
+
         return switch (location) {
             case 0 -> "Internal";
             case 1 -> "External";
             case 2 -> "Reserved";
             case 3 -> "Unknown";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + location;
         };
     }
 
     @NonNull
     public static String resolveWMICacheErrorCorrectType(@Nullable Integer errorCorrectType) {
+
+        if (errorCorrectType == null) return NOT_AVAILABLE;
 
         return switch (errorCorrectType) {
             case 0 -> "Reserved";
@@ -138,7 +146,6 @@ public class WMIValueResolver {
             case 4 -> "Parity";
             case 5 -> "Single-bit ECC";
             case 6 -> "Multi-bit ECC";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + errorCorrectType;
         };
     }
@@ -146,6 +153,8 @@ public class WMIValueResolver {
     // Win32_PhysicalMemory
     @NonNull
     public static String resolveWMIPhysicalMemoryFormFactor(@Nullable Integer formFactor) {
+
+        if (formFactor == null) return NOT_AVAILABLE;
 
         return switch (formFactor) {
             case 0 -> "Unknown";
@@ -172,7 +181,6 @@ public class WMIValueResolver {
             case 21 -> "BGA";
             case 22 -> "FPBGA";
             case 23 -> "LGA";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + formFactor;
         };
     }
@@ -180,6 +188,8 @@ public class WMIValueResolver {
     // Win32_PortConnector
     @NonNull
     public static String resolveWMIPortType(@Nullable Integer portType) {
+
+        if (portType == null) return NOT_AVAILABLE;
 
         return switch (portType) {
             case 0 -> "None";
@@ -216,7 +226,6 @@ public class WMIValueResolver {
             case 31 -> "Network Port";
             case 32 -> "8251 Compatible";
             case 33 -> "8251 FIFO Compatible";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + portType;
         };
     }
@@ -257,10 +266,11 @@ public class WMIValueResolver {
     @NonNull
     public static String resolveMsftNetIpAddressType(@Nullable Integer type) {
 
+        if (type == null) return NOT_AVAILABLE;
+
         return switch (type) {
             case 1 -> "Unicast";
             case 2 -> "Anycast";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + type;
         };
     }
@@ -408,6 +418,8 @@ public class WMIValueResolver {
     @NonNull
     public static String resolveWMIUserAccountSidType(@Nullable Integer sidType) {
 
+        if (sidType == null) return NOT_AVAILABLE;
+
         return switch (sidType) {
             case 1 -> "User";
             case 2 -> "Group";
@@ -418,7 +430,6 @@ public class WMIValueResolver {
             case 7 -> "Invalid";
             case 8 -> "Unknown";
             case 9 -> "Computer";
-            case null -> NOT_AVAILABLE;
             default -> NOT_RESOLVED + sidType;
         };
     }
@@ -445,6 +456,8 @@ public class WMIValueResolver {
     @NonNull
     public static String resolveWMIAvailability(@Nullable Integer availability) {
 
+        if (availability == null) return NOT_AVAILABLE;
+
         return switch (availability) {
             case 1 -> "Other";
             case 2 -> "Unknown";
@@ -467,7 +480,7 @@ public class WMIValueResolver {
             case 19 -> "Not Ready";
             case 20 -> "Not Configured";
             case 21 -> "Quiesced";
-            case null -> NOT_AVAILABLE;
+
             default -> NOT_RESOLVED + availability;
         };
     }
