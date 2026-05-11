@@ -1,6 +1,6 @@
 # Nautilus Windows
 
-Windows build of Nautilus
+32-bit Windows build of Nautilus
 
 # Download
 
@@ -9,20 +9,20 @@ Windows build of Nautilus
 Pre-built binaries are not signed, which means your antivirus or smart-screen may flag it. Make sure you download
 it from trusted sources only.
 
-Binaries can be found in [Releases](https://github.com/nautiliday/nautilus-windows/releases) page.
+Binaries can be found in [Releases](https://github.com/nautiliday/nautilus-windows-x86/releases) page.
 
 ## Building from source
 
 ### Pre-requisites
 
-- JDK 21 or later
+- JDK 17
 - Build Tool: Maven (optional, maven wrapper will be provided)
 
 ### Steps
 
 - Clone the repository
 ```shell
-git clone https://github.com/nautiliday/nautilus-windows.git
+git clone https://github.com/nautiliday/nautilus-windows-x86.git
 cd Nautilus
 ```
 - Build the application 
@@ -30,7 +30,7 @@ cd Nautilus
 ./mvnw -Pdist package jpackage:jpackage@win
 ```
 
-The generated binaries will be available in `../Nautilus/target/output`
+The generated binaries will be available in `{project.directory}/target/output`
 
 > [!IMPORTANT]
 > Note that each subsequent build requires manually clearing out the target folder because for some reason,
