@@ -9,53 +9,38 @@ permissions:
   contents: write
 
 jobs:
+
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: windows-latest
-            platform: windows
-            arch: x86_64
-            jpackage_goal: win
-
-          - os: windows-11-arm
-            platform: windows
-            arch: arm64
-            jpackage_goal: win
-
-    runs-on: ${{ matrix.os }}
-
+    runs-on: windows-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Set up JDK 21
+      - name: Set up JDK 17
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 17
+          architecture: x86
           cache: maven
 
       - name: Build and package
-        run: mvn -Pdist package jpackage:jpackage@${{ matrix.jpackage_goal }}
+        run: mvn -Pdist package jpackage:jpackage@win
 
       # ---------- Package output ----------
       - name: Archive
-        if: matrix.platform == 'windows'
         shell: pwsh
         run: |
           Push-Location target\output\Nautilus
-          tar -a -c -f ../../../nautilus-${{ github.ref_name }}-${{ matrix.platform }}-${{ matrix.arch }}.zip *
+          tar -a -c -f ../../../nautilus-${{ github.ref_name }}-windows-x86.zip *
           Pop-Location
 
       # ---------- Upload artifacts ----------
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: nautilus-${{ matrix.platform }}-${{ matrix.arch }}
-          path: |
-            nautilus-${{ github.ref_name }}-${{ matrix.platform }}-${{ matrix.arch }}.*
+          name: nautilus-windows-x86
+          path: nautilus-${{ github.ref_name }}-windows-x86.zip
 
   release:
     needs: build
@@ -69,6 +54,4 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}
-          files: |
-            nautilus-windows-x86_64/nautilus-${{ github.ref_name }}-windows-x86_64.zip
-            nautilus-windows-arm64/nautilus-${{ github.ref_name }}-windows-arm64.zip
+          files: nautilus-${{ github.ref_name }}-windows-x86.zip
